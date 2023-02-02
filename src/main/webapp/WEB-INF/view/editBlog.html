@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Blog</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Edit Blog</h2>
+    <form action="/edit" method="post" th:object="${edit}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>Id:</label>
+            <input th:field="*{id}" class="form-control" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Title:</label>
+            <input th:field="*{title}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Content:</label>
+            <input th:field="*{content}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Img:</label>
+            <img th:src="${edit.getImg()}" width="300" height="200"><br>
+        </div>
+        <div class="form-group">
+            <input th:field="*{img}" class="form-control" type="hidden" readonly>
+            <input class="form-control" name="upImg" type="file">
+
+        </div>
+        <div class="form-group">
+            <label>Category:</label>
+            <select name="category" class="btn btn-secondary">
+                <div th:field="*{category}">
+                    <option th:each="c:${category}" th:text="${c.getName()}" th:value="${c.getId()}"></option>
+                </div>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+</body>
+</html>
